@@ -22,5 +22,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="VIN Extractor API", version="1.0", lifespan=lifespan)
 
 # ✅ Register routers
-from app.routers import extract
+
+from app.routers import datagen, invoice, extract
+
 app.include_router(extract.router, prefix="/api", tags=["VIN"])
+app.include_router(datagen.router, prefix="/api", tags=["Data Generation"])
+app.include_router(invoice.router, prefix="/api", tags=["Invoice Generation"])
