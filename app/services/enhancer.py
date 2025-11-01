@@ -26,9 +26,9 @@ def enhance_image(img: np.ndarray) -> np.ndarray:
         img = cv2.convertScaleAbs(img, alpha=1.4, beta=0)
 
     # Use half-precision to reduce memory
-    inp = torch.from_numpy(img.astype(np.float16) / 255.0).unsqueeze(0).unsqueeze(0)
+    inp = torch.from_numpy(img.astype(np.float32) / 255.0).unsqueeze(0).unsqueeze(0)
     with torch.no_grad():
-        out = model(inp.to(device, dtype=torch.float16)).cpu().squeeze().numpy()
+        out = model(inp.to(device, dtype=torch.float32)).cpu().squeeze().numpy()
 
     img = (np.clip(out, 0, 1) * 255).astype(np.uint8)
 
