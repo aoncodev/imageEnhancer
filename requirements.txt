@@ -1,12 +1,19 @@
+# Web framework
 fastapi
 uvicorn
-torch
-torchvision
+
+# PyTorch (CPU-only build — lightweight, ~250 MB)
+torch --index-url https://download.pytorch.org/whl/cpu
+torchvision --index-url https://download.pytorch.org/whl/cpu
+
+# Image processing
 opencv-python-headless
 numpy
 scikit-image
 pdf2image
 pillow
 tqdm
+
+# API + configuration
 openai
 python-dotenv
