@@ -18,17 +18,29 @@ async def extract_vin(file: UploadFile = File(...)):
 
         if img is None:
             return JSONResponse(status_code=400, content={"error": "Invalid image."})
-        
-        
 
+        # 🔽 Crop top 60 % of the image
+        h, w = img.shape[:2]
+        crop_height = int(h * 0.6)
+        img = img[0:crop_height, 0:w]
+
+        # 🔽 Optionally resize large pages (still helps speed)
+        max_dim = 1600
+        if max(h, w) > max_dim:
+            scale = max_dim / max(h, w)
+            img = cv2.resize(img, (int(w * scale), int(crop_height * scale)), interpolation=cv2.INTER_AREA)
+
+        # 🔽 Enhance only the cropped region
         enhanced = enhance_image(img)
 
+        # Encode and upload
         _, buffer = cv2.imencode(".png", enhanced)
         key = s3.generate_key(file.filename.replace(".", "_enhanced."))
         image_url = s3.upload_bytes(buffer.tobytes(), key, content_type="image/png")
 
         fields = extract_vin_fields(image_url)
 
+        
         return {
             "filename": file.filename,
             "s3_url": image_url,
