@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+torch
+torchvision
+opencv-python-headless
+numpy
+scikit-image
+pdf2image
+pillow
+tqdm
+openai
+python-dotenv
