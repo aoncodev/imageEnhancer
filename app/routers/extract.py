@@ -25,7 +25,7 @@ async def extract_vin(file: UploadFile = File(...)):
         img = img[0:crop_height, 0:w]
 
         # 🔽 Optionally resize large pages (still helps speed)
-        max_dim = 1600
+        max_dim = 1200
         if max(h, w) > max_dim:
             scale = max_dim / max(h, w)
             img = cv2.resize(img, (int(w * scale), int(crop_height * scale)), interpolation=cv2.INTER_AREA)
