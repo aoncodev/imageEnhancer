@@ -18,7 +18,7 @@ s3_client = boto3.client(
 config = TransferConfig(
     multipart_threshold=5 * 1024 * 1024,  # 5MB
     multipart_chunksize=5 * 1024 * 1024,  # 5MB per chunk
-    max_concurrency=10,
+    max_concurrency=2,
     use_threads=True,
 )
 
