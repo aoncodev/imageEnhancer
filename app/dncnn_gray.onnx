@@ -1,0 +1,1234 @@
+
+pytorch2.9.0:Ò®
+¢
+input
+in_conv.weight
+in_conv.biasconv2dnode_conv2d"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Jc
+	namespaceV: models.dncnn.DnCNN/in_conv: torch.nn.modules.conv.Conv2d/conv2d: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']J¶
+pkg.torch.onnx.fx_node›%conv2d : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%x, %p_in_conv_weight, %p_in_conv_bias, [1, 1], [1, 1]), kwargs = {})J7
+pkg.torch.onnx.name_scopes['', 'in_conv', 'conv2d']J¹
+pkg.torch.onnx.stack_tracešFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 15, in forward
+    out = self.relu(self.in_conv(x))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+â
+conv2drelu	node_relu"ReluJ`
+	namespaceS: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']Jƒ
+pkg.torch.onnx.fx_nodei%relu : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d,), kwargs = {})J2
+pkg.torch.onnx.name_scopes['', 'relu', 'relu']J±
+pkg.torch.onnx.stack_trace’File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 15, in forward
+    out = self.relu(self.in_conv(x))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Á
+relu
+conv_list.0.weight
+conv_list.0.biasconv2d_1node_conv2d_1"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Ji
+	namespace\: models.dncnn.DnCNN/conv_list.0: torch.nn.modules.conv.Conv2d/conv2d_1: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÃ
+pkg.torch.onnx.fx_node¨%conv2d_1 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu, %p_conv_list_0_weight, %p_conv_list_0_bias, [1, 1], [1, 1]), kwargs = {})J=
+pkg.torch.onnx.name_scopes['', 'conv_list.0', 'conv2d_1']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ë
+conv2d_1relu_1node_relu_1"ReluJb
+	namespaceU: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_1: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‡
+pkg.torch.onnx.fx_nodem%relu_1 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_1,), kwargs = {})J4
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_1']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Å
+relu_1
+conv_list.1.weight
+conv_list.1.biasconv2d_2node_conv2d_2"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Ji
+	namespace\: models.dncnn.DnCNN/conv_list.1: torch.nn.modules.conv.Conv2d/conv2d_2: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÅ
+pkg.torch.onnx.fx_nodeª%conv2d_2 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_1, %p_conv_list_1_weight, %p_conv_list_1_bias, [1, 1], [1, 1]), kwargs = {})J=
+pkg.torch.onnx.name_scopes['', 'conv_list.1', 'conv2d_2']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ë
+conv2d_2relu_2node_relu_2"ReluJb
+	namespaceU: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_2: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‡
+pkg.torch.onnx.fx_nodem%relu_2 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_2,), kwargs = {})J4
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_2']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Å
+relu_2
+conv_list.2.weight
+conv_list.2.biasconv2d_3node_conv2d_3"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Ji
+	namespace\: models.dncnn.DnCNN/conv_list.2: torch.nn.modules.conv.Conv2d/conv2d_3: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÅ
+pkg.torch.onnx.fx_nodeª%conv2d_3 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_2, %p_conv_list_2_weight, %p_conv_list_2_bias, [1, 1], [1, 1]), kwargs = {})J=
+pkg.torch.onnx.name_scopes['', 'conv_list.2', 'conv2d_3']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ë
+conv2d_3relu_3node_relu_3"ReluJb
+	namespaceU: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_3: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‡
+pkg.torch.onnx.fx_nodem%relu_3 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_3,), kwargs = {})J4
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_3']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Å
+relu_3
+conv_list.3.weight
+conv_list.3.biasconv2d_4node_conv2d_4"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Ji
+	namespace\: models.dncnn.DnCNN/conv_list.3: torch.nn.modules.conv.Conv2d/conv2d_4: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÅ
+pkg.torch.onnx.fx_nodeª%conv2d_4 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_3, %p_conv_list_3_weight, %p_conv_list_3_bias, [1, 1], [1, 1]), kwargs = {})J=
+pkg.torch.onnx.name_scopes['', 'conv_list.3', 'conv2d_4']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ë
+conv2d_4relu_4node_relu_4"ReluJb
+	namespaceU: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_4: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‡
+pkg.torch.onnx.fx_nodem%relu_4 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_4,), kwargs = {})J4
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_4']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Å
+relu_4
+conv_list.4.weight
+conv_list.4.biasconv2d_5node_conv2d_5"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Ji
+	namespace\: models.dncnn.DnCNN/conv_list.4: torch.nn.modules.conv.Conv2d/conv2d_5: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÅ
+pkg.torch.onnx.fx_nodeª%conv2d_5 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_4, %p_conv_list_4_weight, %p_conv_list_4_bias, [1, 1], [1, 1]), kwargs = {})J=
+pkg.torch.onnx.name_scopes['', 'conv_list.4', 'conv2d_5']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ë
+conv2d_5relu_5node_relu_5"ReluJb
+	namespaceU: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_5: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‡
+pkg.torch.onnx.fx_nodem%relu_5 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_5,), kwargs = {})J4
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_5']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Å
+relu_5
+conv_list.5.weight
+conv_list.5.biasconv2d_6node_conv2d_6"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Ji
+	namespace\: models.dncnn.DnCNN/conv_list.5: torch.nn.modules.conv.Conv2d/conv2d_6: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÅ
+pkg.torch.onnx.fx_nodeª%conv2d_6 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_5, %p_conv_list_5_weight, %p_conv_list_5_bias, [1, 1], [1, 1]), kwargs = {})J=
+pkg.torch.onnx.name_scopes['', 'conv_list.5', 'conv2d_6']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ë
+conv2d_6relu_6node_relu_6"ReluJb
+	namespaceU: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_6: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‡
+pkg.torch.onnx.fx_nodem%relu_6 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_6,), kwargs = {})J4
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_6']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Å
+relu_6
+conv_list.6.weight
+conv_list.6.biasconv2d_7node_conv2d_7"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Ji
+	namespace\: models.dncnn.DnCNN/conv_list.6: torch.nn.modules.conv.Conv2d/conv2d_7: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÅ
+pkg.torch.onnx.fx_nodeª%conv2d_7 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_6, %p_conv_list_6_weight, %p_conv_list_6_bias, [1, 1], [1, 1]), kwargs = {})J=
+pkg.torch.onnx.name_scopes['', 'conv_list.6', 'conv2d_7']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ë
+conv2d_7relu_7node_relu_7"ReluJb
+	namespaceU: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_7: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‡
+pkg.torch.onnx.fx_nodem%relu_7 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_7,), kwargs = {})J4
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_7']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Å
+relu_7
+conv_list.7.weight
+conv_list.7.biasconv2d_8node_conv2d_8"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Ji
+	namespace\: models.dncnn.DnCNN/conv_list.7: torch.nn.modules.conv.Conv2d/conv2d_8: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÅ
+pkg.torch.onnx.fx_nodeª%conv2d_8 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_7, %p_conv_list_7_weight, %p_conv_list_7_bias, [1, 1], [1, 1]), kwargs = {})J=
+pkg.torch.onnx.name_scopes['', 'conv_list.7', 'conv2d_8']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ë
+conv2d_8relu_8node_relu_8"ReluJb
+	namespaceU: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_8: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‡
+pkg.torch.onnx.fx_nodem%relu_8 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_8,), kwargs = {})J4
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_8']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Å
+relu_8
+conv_list.8.weight
+conv_list.8.biasconv2d_9node_conv2d_9"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Ji
+	namespace\: models.dncnn.DnCNN/conv_list.8: torch.nn.modules.conv.Conv2d/conv2d_9: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÅ
+pkg.torch.onnx.fx_nodeª%conv2d_9 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_8, %p_conv_list_8_weight, %p_conv_list_8_bias, [1, 1], [1, 1]), kwargs = {})J=
+pkg.torch.onnx.name_scopes['', 'conv_list.8', 'conv2d_9']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ë
+conv2d_9relu_9node_relu_9"ReluJb
+	namespaceU: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_9: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‡
+pkg.torch.onnx.fx_nodem%relu_9 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_9,), kwargs = {})J4
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_9']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Ê
+relu_9
+conv_list.9.weight
+conv_list.9.bias	conv2d_10node_conv2d_10"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Jj
+	namespace]: models.dncnn.DnCNN/conv_list.9: torch.nn.modules.conv.Conv2d/conv2d_10: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÆ
+pkg.torch.onnx.fx_node«%conv2d_10 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_9, %p_conv_list_9_weight, %p_conv_list_9_bias, [1, 1], [1, 1]), kwargs = {})J>
+pkg.torch.onnx.name_scopes ['', 'conv_list.9', 'conv2d_10']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ò
+	conv2d_10relu_10node_relu_10"ReluJc
+	namespaceV: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_10: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‰
+pkg.torch.onnx.fx_nodeo%relu_10 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_10,), kwargs = {})J5
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_10']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Ò
+relu_10
+conv_list.10.weight
+conv_list.10.bias	conv2d_11node_conv2d_11"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Jk
+	namespace^: models.dncnn.DnCNN/conv_list.10: torch.nn.modules.conv.Conv2d/conv2d_11: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÉ
+pkg.torch.onnx.fx_node®%conv2d_11 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_10, %p_conv_list_10_weight, %p_conv_list_10_bias, [1, 1], [1, 1]), kwargs = {})J?
+pkg.torch.onnx.name_scopes!['', 'conv_list.10', 'conv2d_11']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ò
+	conv2d_11relu_11node_relu_11"ReluJc
+	namespaceV: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_11: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‰
+pkg.torch.onnx.fx_nodeo%relu_11 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_11,), kwargs = {})J5
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_11']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Ò
+relu_11
+conv_list.11.weight
+conv_list.11.bias	conv2d_12node_conv2d_12"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Jk
+	namespace^: models.dncnn.DnCNN/conv_list.11: torch.nn.modules.conv.Conv2d/conv2d_12: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÉ
+pkg.torch.onnx.fx_node®%conv2d_12 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_11, %p_conv_list_11_weight, %p_conv_list_11_bias, [1, 1], [1, 1]), kwargs = {})J?
+pkg.torch.onnx.name_scopes!['', 'conv_list.11', 'conv2d_12']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ò
+	conv2d_12relu_12node_relu_12"ReluJc
+	namespaceV: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_12: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‰
+pkg.torch.onnx.fx_nodeo%relu_12 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_12,), kwargs = {})J5
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_12']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Ò
+relu_12
+conv_list.12.weight
+conv_list.12.bias	conv2d_13node_conv2d_13"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Jk
+	namespace^: models.dncnn.DnCNN/conv_list.12: torch.nn.modules.conv.Conv2d/conv2d_13: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÉ
+pkg.torch.onnx.fx_node®%conv2d_13 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_12, %p_conv_list_12_weight, %p_conv_list_12_bias, [1, 1], [1, 1]), kwargs = {})J?
+pkg.torch.onnx.name_scopes!['', 'conv_list.12', 'conv2d_13']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ò
+	conv2d_13relu_13node_relu_13"ReluJc
+	namespaceV: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_13: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‰
+pkg.torch.onnx.fx_nodeo%relu_13 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_13,), kwargs = {})J5
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_13']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Ò
+relu_13
+conv_list.13.weight
+conv_list.13.bias	conv2d_14node_conv2d_14"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Jk
+	namespace^: models.dncnn.DnCNN/conv_list.13: torch.nn.modules.conv.Conv2d/conv2d_14: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÉ
+pkg.torch.onnx.fx_node®%conv2d_14 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_13, %p_conv_list_13_weight, %p_conv_list_13_bias, [1, 1], [1, 1]), kwargs = {})J?
+pkg.torch.onnx.name_scopes!['', 'conv_list.13', 'conv2d_14']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ò
+	conv2d_14relu_14node_relu_14"ReluJc
+	namespaceV: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_14: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‰
+pkg.torch.onnx.fx_nodeo%relu_14 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_14,), kwargs = {})J5
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_14']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Ò
+relu_14
+conv_list.14.weight
+conv_list.14.bias	conv2d_15node_conv2d_15"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Jk
+	namespace^: models.dncnn.DnCNN/conv_list.14: torch.nn.modules.conv.Conv2d/conv2d_15: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÉ
+pkg.torch.onnx.fx_node®%conv2d_15 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_14, %p_conv_list_14_weight, %p_conv_list_14_bias, [1, 1], [1, 1]), kwargs = {})J?
+pkg.torch.onnx.name_scopes!['', 'conv_list.14', 'conv2d_15']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ò
+	conv2d_15relu_15node_relu_15"ReluJc
+	namespaceV: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_15: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‰
+pkg.torch.onnx.fx_nodeo%relu_15 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_15,), kwargs = {})J5
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_15']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Ò
+relu_15
+conv_list.15.weight
+conv_list.15.bias	conv2d_16node_conv2d_16"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Jk
+	namespace^: models.dncnn.DnCNN/conv_list.15: torch.nn.modules.conv.Conv2d/conv2d_16: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÉ
+pkg.torch.onnx.fx_node®%conv2d_16 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_15, %p_conv_list_15_weight, %p_conv_list_15_bias, [1, 1], [1, 1]), kwargs = {})J?
+pkg.torch.onnx.name_scopes!['', 'conv_list.15', 'conv2d_16']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ò
+	conv2d_16relu_16node_relu_16"ReluJc
+	namespaceV: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_16: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‰
+pkg.torch.onnx.fx_nodeo%relu_16 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_16,), kwargs = {})J5
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_16']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Ò
+relu_16
+conv_list.16.weight
+conv_list.16.bias	conv2d_17node_conv2d_17"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Jk
+	namespace^: models.dncnn.DnCNN/conv_list.16: torch.nn.modules.conv.Conv2d/conv2d_17: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÉ
+pkg.torch.onnx.fx_node®%conv2d_17 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_16, %p_conv_list_16_weight, %p_conv_list_16_bias, [1, 1], [1, 1]), kwargs = {})J?
+pkg.torch.onnx.name_scopes!['', 'conv_list.16', 'conv2d_17']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ò
+	conv2d_17relu_17node_relu_17"ReluJc
+	namespaceV: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_17: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‰
+pkg.torch.onnx.fx_nodeo%relu_17 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_17,), kwargs = {})J5
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_17']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+Ò
+relu_17
+conv_list.17.weight
+conv_list.17.bias	conv2d_18node_conv2d_18"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Jk
+	namespace^: models.dncnn.DnCNN/conv_list.17: torch.nn.modules.conv.Conv2d/conv2d_18: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÉ
+pkg.torch.onnx.fx_node®%conv2d_18 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_17, %p_conv_list_17_weight, %p_conv_list_17_bias, [1, 1], [1, 1]), kwargs = {})J?
+pkg.torch.onnx.name_scopes!['', 'conv_list.17', 'conv2d_18']J´
+pkg.torch.onnx.stack_trace•File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ò
+	conv2d_18relu_18node_relu_18"ReluJc
+	namespaceV: models.dncnn.DnCNN/relu: torch.nn.modules.activation.ReLU/relu_18: aten.relu.defaultJq
+pkg.torch.onnx.class_hierarchyO['models.dncnn.DnCNN', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']J‰
+pkg.torch.onnx.fx_nodeo%relu_18 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%conv2d_18,), kwargs = {})J5
+pkg.torch.onnx.name_scopes['', 'relu', 'relu_18']J¬
+pkg.torch.onnx.stack_traceFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 17, in forward
+    out = self.relu(layer(out))
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+·
+relu_18
+out_conv.weight
+out_conv.bias	conv2d_19node_conv2d_19"Conv*
+group *
+pads@@@@ *
+strides@@ *
+auto_pad"NOTSET *
+	dilations@@ Jg
+	namespaceZ: models.dncnn.DnCNN/out_conv: torch.nn.modules.conv.Conv2d/conv2d_19: aten.conv2d.defaultJo
+pkg.torch.onnx.class_hierarchyM['models.dncnn.DnCNN', 'torch.nn.modules.conv.Conv2d', 'aten.conv2d.default']JÁ
+pkg.torch.onnx.fx_node¦%conv2d_19 : [num_users=1] = call_function[target=torch.ops.aten.conv2d.default](args = (%relu_18, %p_out_conv_weight, %p_out_conv_bias, [1, 1], [1, 1]), kwargs = {})J;
+pkg.torch.onnx.name_scopes['', 'out_conv', 'conv2d_19']J±
+pkg.torch.onnx.stack_trace’File "/Users/aon/aliasInvoice/app/models/dncnn.py", line 18, in forward
+    out = self.out_conv(out)
+  File "/Users/aon/aliasInvoice/env/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+ì
+input
+	conv2d_19outputnode_sub_116"SubJ:
+	namespace-: models.dncnn.DnCNN/sub_116: aten.sub.TensorJK
+pkg.torch.onnx.class_hierarchy)['models.dncnn.DnCNN', 'aten.sub.Tensor']JŠ
+pkg.torch.onnx.fx_nodep%sub_116 : [num_users=1] = call_function[target=torch.ops.aten.sub.Tensor](args = (%x, %conv2d_19), kwargs = {})J-
+pkg.torch.onnx.name_scopes['', 'sub_116']Jx
+pkg.torch.onnx.stack_traceZFile "/Users/aon/aliasInvoice/app/models/dncnn.py", line 19, in forward
+    return x - out
+main_graph*[@Bin_conv.weightj 
+locationdncnn_gray.onnx.dataj
+offset0j
+length2304p*•@Bin_conv.biasJ€©½¦™¾þ1>áÏ>}ùÈ¼ÃÔ½€t¾dD=Û—~¼¤ú½åsT=Ú€¥=zl>ë:u>!\—=Ç7d¾h²-¾ d|>}E>Ïö=Lûß½qÂ™>1¢Œ>›–>Ú¡¾ e¾Ù{½—°˜>Ô|Û½5)¾~¡:>Ñ¿½.£½”½y`"=:‹*½¤†>«àÀ½x–°=¢¼V>h>[+=ªó=>T=ÑóÙ½‚Í—>··[=ÉÂ¥½áË ½óŽ8¾XùŠ>no=àù‹¾ŸQ‚¼Þ¬%>1Í–=_[™=G=ä<ØÐÐ=–=E½aaö½¨Ÿ¾Ð’C½¹»=*™@Bconv_list.0.biasJ€Bâ\<EC×<Q`"½ýû;þÜ¼kÎ	=æ¸À»®·Ø<ÆþÉ<Z'¼Û©<!Ä¼;=Pª ¼Ö«;á='g¨¼0õ>»YýÇ<© —¼ÿ5=–Æ<£Þ²<©Í»Ð±Š¼KùÒ»´<†<ùú!¼¹ Û¼T2¼ià¼)´•<-…½$Å½£Aù;Qø»ôÊø¼7ô<LB¾¼Ú?
+=K-K=ÂÂà<8øF=Ù´<¸"=Šß½W±;fsÝ¼ 9¼ôª¼›à³;t'=A³Û:Zib;™Ð;œã<Îè<¯·©9¬2p<Vï5<_` »Nó±¼\Ù3<YWÕ;*™@Bconv_list.1.biasJ€Nc0=A§=Ï_`<º5=«IŽ»yôœ¼&Ù$=à
+¼"”Q¼r¸H<Qoë<5„= #h=HL<ýL=¢Z=€1Ä<ê[¼m!ˆ½ð>~<È‰š:—N(¼?=ˆü†<øk¬<§7¼õ<V&=L%^=­
+*=ØXA;l+)=b†®<èlÅ<µ7í¼C¼Ñ<ç»=i(g¼Ic-=zq=…Ã<ÿ½•È¥<‡þu<ï¯=oI½×"‰<¤³=²‰C=Rƒ¼é¾¼eÏÊ;kR=ÂP.=›8R»ô=âò<Ûí"½õß	=*Fˆ<´X¼ñÂñ<@ßÒºí­Ô<*™@Bconv_list.2.biasJ€‰Å½ý.Ž¼¸i=ã¼x•<¥Á·;©Äï¼þ»½ôúW¼’cL»E-õ<>=V=`ˆ}=ÃEž<Óp‚<O“<=øÞ;ý_Ñ;î€¿;I<Q)=#]~½eCò¼ýà‹<˜-‡<øÍ¼Y™Y=ZD¥<Z~¼æý]»rÓ€<…²<;R_¼1*6¼ró=¾K»T5?¼(²;X±N»Øê<U—|¼ú5›;„z)»Æ	½¡ÈW=c˜T½9S_¼þ@Ö;úÔÍ<½˜ˆ²¼µÈ=ÀSN=Ø<qKC= p<¢þ=ÝYz;QS%= Ò¦¼àz=š'v=—ð¼ß`=*™@Bconv_list.3.biasJ€Ìr-¼Ù7ï<Â‰½ü€9=ºúþ;X×Æ»`‘<À#”¼[½—ô=mÐl¼`å»)È.=Qè½:×Q¼r…û¼žk¾<ìœ¸:@wD=o¿ì:yl!¼Ã§iºâÞ=esJ<£V=}.Q¼½L*<Øi@½^'ì<À=]ÿb¼phÞ<‰2=úƒ½Kæ,=vk9=:«h='u½:Ð½Fû½Ùp/=1;1½—ÿ»9ïÓ¼Bý< 6 ¼cà
+<{Àº·Ñ¼k1%¼ze—;äM|¼ÃÜ»Ø·»¼È<H=ö,I=ï;j<åþÑ<U_Ž<²ŸO=qÓ<Hº<mœ<*™@Bconv_list.4.biasJ€/91=60¼vÄ$¼y=ü
+=Q„¼ì‘½³7<Ç½ý<°Ó;x­G=n;íV=Õƒ<–pø¹7L%;"Êó¼ò ½¥·Ãº Ò°¼ŸF=ýŠG½óß1¼-mÖ»*=ÏÌ<Þ¬r¼•ÿ:q ~=H¦±<ß…½iz“¼Äf=´ÿ<Í<>Ï’º×¦ =Bp¼ð5~<¡…<"˜9=‘Q¼Ÿ;€Ñ»|9=»×è<®ç7¼ Ë±<1¨0¼wV<ƒv¼üzZ¼ÛS=,o<s¼šDc¼>7X=Vk ={ŠÎ;0ñöº µ)<&÷¼¸~a<*™@Bconv_list.5.biasJ€„F¼H4¼bˆŒ¼¤P0ºNÆ;ßhŠ;ï4I=ó_t¼†™ì<ˆçã¼•+¼—<Ý‘<¬5=(WV½ó]©;÷gà<ðC9½?‘t=¿Ï‰¼ÙSé¼&†<=F«>;þcÖ¼AÁŸ¼¬Å<#¼ÄK·<YoÚ»š‚Q¼Ÿ¢Â;W°<|.£¼£¢Ï¼®×<¢r»&t~<ø5Ñ<%1==®N¼¡‚¼ì'½M&Î<Í|€<üt–¼¹è<Â®;tÈ-=Vwž¼(dR=ÜŸ¾º"<ç¼•mŠ¼kÀÕºyÞ‘¼×‘„<ýHO½<þÂ<€³¼#>\¼©®Ø¼wUC½Vðè<"®;*™@Bconv_list.6.biasJ€Çïú<z—0;ŒG¼°(=/é;‡¥Â<;­Ä¼Ô Æ<X¼½±	=Ska¼$I:=‰ô ½ßŒ‹<ÆÉ™< fM<1è/¼¤D¼*-:»é§<Šb"¼M&½¨„”¼J¦Í;å14½™ ‡¼îm‹»*hÓ;„¨¼è”Ï:ŽAƒ<6£Ò¼¹Xû¼ò"=ï›½ÜÖ-¼Že<'}=:Ë8?•X¼#o;=l<óOÂ»Û…=Âú=+ ;Td=ÎT‰<yæ¼<ŽÔ»©l½Š2ø<Ýs	;N"É<_sSº| ½S²L¼Ð˜„½69C¼°tS½ÒP¢¼ãXE<Mø=›Ï½<*™@Bconv_list.7.biasJ€Æ.u¼j¹¸<c¼iÐ{¼qŸ½ËÔ<š¾¼1¤)=Ê2¼áåO=U1+¼A¢Ó¼-ž6½D7½ßr¥½ìÐ<ú¥Ì<ßýE=,¬½šf<<@|¼N`¡<R²Ÿ»Å°º<=R¼À3½{,;‹p2½}h	=äÜ<~4Ò<€¡=ñn<:fé<÷ó½`­#¼øsä»†c½Ì;3=¾e½µÙ¼ª»=Y¾Â¼ª×:cY?=‡<€µ<×ª¼2•;o@=«]Â<Ÿ=hC<ã"="]ý<? »9¬=
+±<¶½‡ê‘¼)0=|Ïz<·ãK=«(»*™@Bconv_list.8.biasJ€£N½ð£Ê<%Æ=ˆ:O¼„_½Â'=××<LÎ<)!º¼ºt½•­ù¼Ìë=A\ú»°É<¼¬h)<Z	<šáh½Zu,=òG ¼š¨½ªWå<ý9#½Õ\1½³ë ½ŽŸ½¿B¼ÈËú»ã–Œ<Ûµÿ<%B‘¼/Þ½È*<F÷V==“½óû½B<ÿ¬=°{½Àê,½qÍu»Ý½+ þ<1îÞ<÷½7N=\^ú»Kº	<¶¬½ÛÆ©<{§¼–#*¼Þg½ü¦y½u$=\,&=ìiy<ô[¼†½[æ<ÏO= ù¹¼t^š¼ü9¡½â¼#<*™@Bconv_list.9.biasJ€—2Ÿ=ø6½>C=±®ç<á#K=X‰<èô½;g$½éê.=	jô<Ï–ˆ<é—˜»À=oG¼;“ü¼÷½Sòõ»‰M ½ùBa=ð¦Å»nç=ã¨
+=2h¼ì ž¼Î¾ ½jb=—<²<ÆF—<>+¼¯Â«<ÊÙ=¼.ÃW¼”ªd»Qüw<ÐÞÍ»ÿà¯<#<†iõ<þæÂ<ÄHÙ<N½;&E½iö¼Î=ë½j;><=¶\•<÷á<44\»Ëî½#f$=þ³Ñ»­·<¦á[=> v»
+= c<Ìé<“<(ˆ;Û)=|–ù¼æm=‚@õ»*š@Bconv_list.10.biasJ€…/Ç<g1/=d½£<êWÉ<bŠ;ÉÙ>»/v<9 ØºËÚ«¼Ø—°¼kž=5»©D#»¢Ÿ\¼:2h¼×¹½3Cø<ÅÇó<$#=Û§_½Æä<©;b½e_¡<€ï´<‚ÂP»^B½¼þdÛ<êœ¼sm½Ý„8=>=‚¼€½H½`²K:»þÃ»>@Ì»P"-<œ&ªºIó¼e²û¼MÂ¸<xµò¼¢¥¢¼OCÙ<=NW=ò$½Ý‡­»,Ê»¹Ø÷<‰´=¸o»ÑÀ¼c@;[t½Lø¤»rkÕ¼+öS½YÂ<vc×;Ð#F¼¡xºæXÛ<¿ ¸<^N?½*š@Bconv_list.11.biasJ€¿î›<)™ð¼³6l½`×½ðv˜¼Áx„;Ð‚…»Gõ&9Önà<poˆ½d<…™0<ò¸Û<®z<¶=Ž:;°z=²¼9=„G=Ì<H;<°“—<&%è;-¦Ñ;óµå¼°=ÒÃ<•E£<¡Ú–½ˆ8¹¼–½JÛ½ä§Ó<â"5¼M}â¼ëÚy½h=V‡¼å¤»¼Íú»#ÝQ<Wb®¼ìg&=_#K<!Æ¼’Qg<TV½EŒ2½¥<M©ú¼|V¼”çÐ<(ç< ñ:†¶ƒ»µ„ò<¢c½D[2½šç¼ò =›+ð¼
+=o)G½*š@Bconv_list.12.biasJ€Ø1`<'—¯»9Æ}¼™ø=½p‘Ø;)ÖD¼£Ä<2ý!=•[Ÿ¼;*…<ä†º=âÚ»”’v½mB<¼kH½8í<ö5:‰d=tÒ4<h¿ú<—oZ=uFå<¥`<y=2ä¼Cà*<¢¼IW½™=º®¢<óç5<ÌŒ¼ê—=÷C¼Vm£»;Í1=¨½²=\F<ë{½ í;f;=–§ÿ<óÖ,=X%“»¦O½;ƒ×5»F"8½
+å5½€Ï=øé<LL?<n¾„<‹JÍ¼ÉiŸ<„?=Ša/;Jºs½V(Õ¼a8<c=!Å@½¼_<ª˜(»*š@Bconv_list.13.biasJ€-„O½0Ò´¼uqJ½+¦´;ˆBB½Àe½ñZØ<'5Â¼·Í¼í!=÷:Û<`ö¼[ºà¼!IY=–Šü;\…‚<ðT€<Ä1¶;j>6<6Ã£¼>%¼¶Œ¼g5i:PÐõ¼rŒ¼_<$º@OŽ<­Iæ¼>¾<YÝW<L>À¼`ç<M.<¯<šx<H]3½ÃÅÚ;„©“¼øi€¼2 Ë<Õ3¼¼H,„»/#§¼^Ã¼­GÖ<ä_[½­=ŽÍÉ¼Ñ8<¯×;ôõ•¼ÇÕÌ;ŸÓå<¬oË<»N»»AVŠ½Ü"(½ÁäÃ<Ü®ø<þ€3=ñ¼É_ì¼<–<*š@Bconv_list.14.biasJ€åók<ì‹Ë¼&bf¼U/»hÂ[<~¯¼Ønr<³YÁ¼öˆ<uè#½“:.=ô¸<›O\;d×g<O½¿¹eu½J í»kz<ÒöN½ìý­<+p\½aù<BÜA»Àü¼¾-È<üŠ;‡†¼ƒß©¼‘\Ð¼:³æ¼†zU<ž0ª;*ä½€z<DŒ¼Ï¡ó;!‰¼7¡¼ý•º;aª=ßØ¼þÊ÷¼½"<BˆL»ú<11	<Ô“”<ÊnÚ;¶¶€¼êDë<ƒ<27½ï*îº®:b½• È<š\R¼¹`¯<¬R½¢´<ðmŽ»Þe=ö\ã¼âlL¼ÚÔ½*š@Bconv_list.15.biasJ€û^;zo“½:N½Îs	<{~À<}V;x3½*RT<£„Ö<î1»\»ÙÖ»rW;pNë<~•<iOÝ<ÿ¼ Q=â¦à»¦	=µd¼I;½§˜¼¦†­<þBÛ»lù€¼3fû<ãÓÀ:Qªß¼[Ám<Õ¿=îa<rû%½š×'½(Ví<}·}½‡é×<R=!½ñŠO;Ü„K½Äq»––ƒ<Ðk½¬ºa¼0\D<Q³[<Åó/½ºŠ±»°9½œ›<ÄGû¼ÌÈû9ñ\Õ<üi=·¶<+†R½=4 ¼ö½É˜$=p­<ŸC	=®HŠ¼h¨!<àÓ<*š@Bconv_list.16.biasJ€g²<Ù2´97— <µOÂ<fÀÜ¼Ëáü»øª;…Èk¼Ö‘î¼Lƒ=Swh<ið;<Ó‹ž¼,z;£½š¸<Ô<›'G<9ÝÞ¼÷Å½y½Œ%¼ÍÑ<ð™½ÉÒý¼‚z(ºK€¼Zpœ<»ë¼þ®¼Ž³=M8½x$=»1‰½<b?=ÌwW<6W;UÈ„¼H¹¼B®•¹a“¼Ón•<iäÎ<¯¿hº7gT¼‰W<»<nÝ¼õ[¼8N÷¼Ã#½ÃÌ»OÛ¼­¢Ð:ç˜=]ô<¶!Ä<ÞgO» …Ë¼Ãp½¬¼ä<IÝ¼(§¸»VçM<*š@Bconv_list.17.biasJ€Ïe½ÃÞ7¼pÞ=jb ½ŒÆ'<x¡Ï¼2´Ž¼;‡º<#‚¼Üà=7˜1¼Þ=¼D#Þ¼·ù ¼I§àºe	¼wÉ:}'Ë¼ÄFµ<:Ä;\”±<Ã¸Ÿ»Á™;jÎ¼.á<ŽÙ<²É=	£\<‚p½a¼ý„Ï¼°«Ù<³Û×<Â½²”½WŽ<†¼v¯<ð„£¼¹m¢»Îó’<ös¼ñ#½šOî¼ãdÎ<n3h<dS¼D½n&ä<À=8o<é?½¨&¨:
+83<`g›<\!ß¼°éû;Í0¬¼‹Ó€¼¶†½ „=IÙ*=‘z¼®tH¼*_@Bout_conv.weightj 
+locationdncnn_gray.onnx.dataj
+offset2304j
+length2304p*Bout_conv.biasJÙ‰¼*d@@Bconv_list.0.weightj 
+locationdncnn_gray.onnx.dataj
+offset4608j
+length147456p*f@@Bconv_list.1.weightj 
+locationdncnn_gray.onnx.dataj
+offset152064j
+length147456p*f@@Bconv_list.2.weightj 
+locationdncnn_gray.onnx.dataj
+offset299520j
+length147456p*f@@Bconv_list.3.weightj 
+locationdncnn_gray.onnx.dataj
+offset446976j
+length147456p*f@@Bconv_list.4.weightj 
+locationdncnn_gray.onnx.dataj
+offset594432j
+length147456p*f@@Bconv_list.5.weightj 
+locationdncnn_gray.onnx.dataj
+offset741888j
+length147456p*f@@Bconv_list.6.weightj 
+locationdncnn_gray.onnx.dataj
+offset889344j
+length147456p*g@@Bconv_list.7.weightj 
+locationdncnn_gray.onnx.dataj
+offset1036800j
+length147456p*g@@Bconv_list.8.weightj 
+locationdncnn_gray.onnx.dataj
+offset1184256j
+length147456p*g@@Bconv_list.9.weightj 
+locationdncnn_gray.onnx.dataj
+offset1331712j
+length147456p*h@@Bconv_list.10.weightj 
+locationdncnn_gray.onnx.dataj
+offset1479168j
+length147456p*h@@Bconv_list.11.weightj 
+locationdncnn_gray.onnx.dataj
+offset1626624j
+length147456p*h@@Bconv_list.12.weightj 
+locationdncnn_gray.onnx.dataj
+offset1774080j
+length147456p*h@@Bconv_list.13.weightj 
+locationdncnn_gray.onnx.dataj
+offset1921536j
+length147456p*h@@Bconv_list.14.weightj 
+locationdncnn_gray.onnx.dataj
+offset2068992j
+length147456p*h@@Bconv_list.15.weightj 
+locationdncnn_gray.onnx.dataj
+offset2216448j
+length147456p*h@@Bconv_list.16.weightj 
+locationdncnn_gray.onnx.dataj
+offset2363904j
+length147456p*h@@Bconv_list.17.weightj 
+locationdncnn_gray.onnx.dataj
+offset2511360j
+length147456pZÊ
+input
+
+
+
+s53
+s0"=
+/pkg.torch.export.graph_signature.InputSpec.kind
+USER_INPUT"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"&
+!pkg.torch.onnx.original_node_namexb”
+output
+
+
+
+s53
+s0"?
+0pkg.torch.export.graph_signature.OutputSpec.kindUSER_OUTPUT",
+!pkg.torch.onnx.original_node_namesub_116jÜ
+in_conv.weight
+
+@
+
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"5
+!pkg.torch.onnx.original_node_namep_in_conv_weightjÌ
+in_conv.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"3
+!pkg.torch.onnx.original_node_namep_in_conv_biasjÔ
+conv_list.0.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"7
+!pkg.torch.onnx.original_node_namep_conv_list_0_biasjÔ
+conv_list.1.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"7
+!pkg.torch.onnx.original_node_namep_conv_list_1_biasjÔ
+conv_list.2.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"7
+!pkg.torch.onnx.original_node_namep_conv_list_2_biasjÔ
+conv_list.3.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"7
+!pkg.torch.onnx.original_node_namep_conv_list_3_biasjÔ
+conv_list.4.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"7
+!pkg.torch.onnx.original_node_namep_conv_list_4_biasjÔ
+conv_list.5.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"7
+!pkg.torch.onnx.original_node_namep_conv_list_5_biasjÔ
+conv_list.6.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"7
+!pkg.torch.onnx.original_node_namep_conv_list_6_biasjÔ
+conv_list.7.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"7
+!pkg.torch.onnx.original_node_namep_conv_list_7_biasjÔ
+conv_list.8.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"7
+!pkg.torch.onnx.original_node_namep_conv_list_8_biasjÔ
+conv_list.9.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"7
+!pkg.torch.onnx.original_node_namep_conv_list_9_biasjÖ
+conv_list.10.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"8
+!pkg.torch.onnx.original_node_namep_conv_list_10_biasjÖ
+conv_list.11.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"8
+!pkg.torch.onnx.original_node_namep_conv_list_11_biasjÖ
+conv_list.12.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"8
+!pkg.torch.onnx.original_node_namep_conv_list_12_biasjÖ
+conv_list.13.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"8
+!pkg.torch.onnx.original_node_namep_conv_list_13_biasjÖ
+conv_list.14.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"8
+!pkg.torch.onnx.original_node_namep_conv_list_14_biasjÖ
+conv_list.15.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"8
+!pkg.torch.onnx.original_node_namep_conv_list_15_biasjÖ
+conv_list.16.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"8
+!pkg.torch.onnx.original_node_namep_conv_list_16_biasjÖ
+conv_list.17.bias
+
+
+@"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"8
+!pkg.torch.onnx.original_node_namep_conv_list_17_biasjÞ
+out_conv.weight
+
+
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"6
+!pkg.torch.onnx.original_node_namep_out_conv_weightjÎ
+out_conv.bias
+
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"4
+!pkg.torch.onnx.original_node_namep_out_conv_biasjä
+conv_list.0.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"9
+!pkg.torch.onnx.original_node_namep_conv_list_0_weightjä
+conv_list.1.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"9
+!pkg.torch.onnx.original_node_namep_conv_list_1_weightjä
+conv_list.2.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"9
+!pkg.torch.onnx.original_node_namep_conv_list_2_weightjä
+conv_list.3.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"9
+!pkg.torch.onnx.original_node_namep_conv_list_3_weightjä
+conv_list.4.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"9
+!pkg.torch.onnx.original_node_namep_conv_list_4_weightjä
+conv_list.5.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"9
+!pkg.torch.onnx.original_node_namep_conv_list_5_weightjä
+conv_list.6.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"9
+!pkg.torch.onnx.original_node_namep_conv_list_6_weightjä
+conv_list.7.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"9
+!pkg.torch.onnx.original_node_namep_conv_list_7_weightjä
+conv_list.8.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"9
+!pkg.torch.onnx.original_node_namep_conv_list_8_weightjä
+conv_list.9.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"9
+!pkg.torch.onnx.original_node_namep_conv_list_9_weightjæ
+conv_list.10.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone":
+!pkg.torch.onnx.original_node_namep_conv_list_10_weightjæ
+conv_list.11.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone":
+!pkg.torch.onnx.original_node_namep_conv_list_11_weightjæ
+conv_list.12.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone":
+!pkg.torch.onnx.original_node_namep_conv_list_12_weightjæ
+conv_list.13.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone":
+!pkg.torch.onnx.original_node_namep_conv_list_13_weightjæ
+conv_list.14.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone":
+!pkg.torch.onnx.original_node_namep_conv_list_14_weightjæ
+conv_list.15.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone":
+!pkg.torch.onnx.original_node_namep_conv_list_15_weightjæ
+conv_list.16.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone":
+!pkg.torch.onnx.original_node_namep_conv_list_16_weightjæ
+conv_list.17.weight
+
+@
+@
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone":
+!pkg.torch.onnx.original_node_namep_conv_list_17_weightj%
+conv2d
+
+
+@
+s53
+s0j#
+relu
+
+
+@
+s53
+s0j'
+conv2d_1
+
+
+@
+s53
+s0j%
+relu_1
+
+
+@
+s53
+s0j'
+conv2d_2
+
+
+@
+s53
+s0j%
+relu_2
+
+
+@
+s53
+s0j'
+conv2d_3
+
+
+@
+s53
+s0j%
+relu_3
+
+
+@
+s53
+s0j'
+conv2d_4
+
+
+@
+s53
+s0j%
+relu_4
+
+
+@
+s53
+s0j'
+conv2d_5
+
+
+@
+s53
+s0j%
+relu_5
+
+
+@
+s53
+s0j'
+conv2d_6
+
+
+@
+s53
+s0j%
+relu_6
+
+
+@
+s53
+s0j'
+conv2d_7
+
+
+@
+s53
+s0j%
+relu_7
+
+
+@
+s53
+s0j'
+conv2d_8
+
+
+@
+s53
+s0j%
+relu_8
+
+
+@
+s53
+s0j'
+conv2d_9
+
+
+@
+s53
+s0j%
+relu_9
+
+
+@
+s53
+s0j(
+	conv2d_10
+
+
+@
+s53
+s0j&
+relu_10
+
+
+@
+s53
+s0j(
+	conv2d_11
+
+
+@
+s53
+s0j&
+relu_11
+
+
+@
+s53
+s0j(
+	conv2d_12
+
+
+@
+s53
+s0j&
+relu_12
+
+
+@
+s53
+s0j(
+	conv2d_13
+
+
+@
+s53
+s0j&
+relu_13
+
+
+@
+s53
+s0j(
+	conv2d_14
+
+
+@
+s53
+s0j&
+relu_14
+
+
+@
+s53
+s0j(
+	conv2d_15
+
+
+@
+s53
+s0j&
+relu_15
+
+
+@
+s53
+s0j(
+	conv2d_16
+
+
+@
+s53
+s0j&
+relu_16
+
+
+@
+s53
+s0j(
+	conv2d_17
+
+
+@
+s53
+s0j&
+relu_17
+
+
+@
+s53
+s0j(
+	conv2d_18
+
+
+@
+s53
+s0j&
+relu_18
+
+
+@
+s53
+s0j(
+	conv2d_19
+
+
+
+s53
+s0‚
+0pkg.torch.export.ExportedProgram.graph_signatureÌ
+# inputs
+p_in_conv_weight: PARAMETER target='in_conv.weight'
+p_in_conv_bias: PARAMETER target='in_conv.bias'
+p_conv_list_0_weight: PARAMETER target='conv_list.0.weight'
+p_conv_list_0_bias: PARAMETER target='conv_list.0.bias'
+p_conv_list_1_weight: PARAMETER target='conv_list.1.weight'
+p_conv_list_1_bias: PARAMETER target='conv_list.1.bias'
+p_conv_list_2_weight: PARAMETER target='conv_list.2.weight'
+p_conv_list_2_bias: PARAMETER target='conv_list.2.bias'
+p_conv_list_3_weight: PARAMETER target='conv_list.3.weight'
+p_conv_list_3_bias: PARAMETER target='conv_list.3.bias'
+p_conv_list_4_weight: PARAMETER target='conv_list.4.weight'
+p_conv_list_4_bias: PARAMETER target='conv_list.4.bias'
+p_conv_list_5_weight: PARAMETER target='conv_list.5.weight'
+p_conv_list_5_bias: PARAMETER target='conv_list.5.bias'
+p_conv_list_6_weight: PARAMETER target='conv_list.6.weight'
+p_conv_list_6_bias: PARAMETER target='conv_list.6.bias'
+p_conv_list_7_weight: PARAMETER target='conv_list.7.weight'
+p_conv_list_7_bias: PARAMETER target='conv_list.7.bias'
+p_conv_list_8_weight: PARAMETER target='conv_list.8.weight'
+p_conv_list_8_bias: PARAMETER target='conv_list.8.bias'
+p_conv_list_9_weight: PARAMETER target='conv_list.9.weight'
+p_conv_list_9_bias: PARAMETER target='conv_list.9.bias'
+p_conv_list_10_weight: PARAMETER target='conv_list.10.weight'
+p_conv_list_10_bias: PARAMETER target='conv_list.10.bias'
+p_conv_list_11_weight: PARAMETER target='conv_list.11.weight'
+p_conv_list_11_bias: PARAMETER target='conv_list.11.bias'
+p_conv_list_12_weight: PARAMETER target='conv_list.12.weight'
+p_conv_list_12_bias: PARAMETER target='conv_list.12.bias'
+p_conv_list_13_weight: PARAMETER target='conv_list.13.weight'
+p_conv_list_13_bias: PARAMETER target='conv_list.13.bias'
+p_conv_list_14_weight: PARAMETER target='conv_list.14.weight'
+p_conv_list_14_bias: PARAMETER target='conv_list.14.bias'
+p_conv_list_15_weight: PARAMETER target='conv_list.15.weight'
+p_conv_list_15_bias: PARAMETER target='conv_list.15.bias'
+p_conv_list_16_weight: PARAMETER target='conv_list.16.weight'
+p_conv_list_16_bias: PARAMETER target='conv_list.16.bias'
+p_conv_list_17_weight: PARAMETER target='conv_list.17.weight'
+p_conv_list_17_bias: PARAMETER target='conv_list.17.bias'
+p_out_conv_weight: PARAMETER target='out_conv.weight'
+p_out_conv_bias: PARAMETER target='out_conv.bias'
+x: USER_INPUT
+
+# outputs
+sub_116: USER_OUTPUT
+‚]
+2pkg.torch.export.ExportedProgram.range_constraints'{s53: VR[0, int_oo], s0: VR[0, int_oo]}B
+ 

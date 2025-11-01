@@ -1,28 +1,26 @@
 from dotenv import load_dotenv
-load_dotenv()
-
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
-
+load_dotenv()
 
 # ✅ Lifespan context replaces on_event()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("[INFO] Starting VIN Extractor service...")
 
-    # 🔹 Import enhancer here so model loads & warms up before serving
+    # 🔹 Import enhancer here so ONNXRuntime session loads before first request
     from app.services import enhancer
-    _ = enhancer.model  # Access once to trigger load/warm-up
-    print("[INFO] DnCNN model preloaded and ready.")
+    _ = enhancer.enhance_image  # Access once to ensure model file loads
+    print("[INFO] DnCNN ONNX model preloaded and ready.")
 
     yield  # 👈 Application runs between startup and shutdown
 
     print("[INFO] Shutting down VIN Extractor service...")
 
+# ✅ Pass lifespan handler to FastAPI
+app = FastAPI(title="VIN Extractor API", version="1.0", lifespan=lifespan)
 
-
-app = FastAPI(title="VIN Extractor API", version="1.0")
-
+# ✅ Register routers
 from app.routers import extract
 app.include_router(extract.router, prefix="/api", tags=["VIN"])
