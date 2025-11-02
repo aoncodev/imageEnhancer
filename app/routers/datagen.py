@@ -39,18 +39,38 @@ def generate_iin(country: str) -> str:
     return "000000000000"
 
 def generate_phone(country: str) -> str:
-    """Generate realistic phone number with actual operator prefixes."""
+    """Generate realistic full phone numbers by country (with valid operator codes and correct total length)."""
     operator_prefixes = {
-        "Russia": ["+7900", "+7911", "+7926", "+7937", "+7940", "+7952", "+7965", "+7981"],
-        "Kazakhstan": ["+7701", "+7705", "+7707", "+7708", "+7712"],
-        "Kyrgyzstan": ["+99650", "+99655", "+99670", "+99677", "+99699"],
-        "Uzbekistan": ["+99890", "+99891", "+99893", "+99894", "+99897", "+99899"],
+        # Russia: +7 + 3-digit operator code + 7-digit subscriber number (total 11 digits)
+        "Russia": {
+            "prefixes": ["+7900", "+7911", "+7926", "+7937", "+7952", "+7965", "+7981"],
+            "subscriber_len": 7,
+        },
+        # Kazakhstan: +7 + 3-digit operator code + 7-digit subscriber number (total 11 digits)
+        "Kazakhstan": {
+            "prefixes": ["+7701", "+7705", "+7707", "+7708", "+7712"],
+            "subscriber_len": 7,
+        },
+        # Kyrgyzstan: +996 + 2-digit operator code + 6-digit subscriber number (total 12 digits)
+        "Kyrgyzstan": {
+            "prefixes": ["+99650", "+99655", "+99670", "+99677", "+99699"],
+            "subscriber_len": 6,
+        },
+        # Uzbekistan: +998 + 2-digit operator code + 7-digit subscriber number (total 12 digits)
+        "Uzbekistan": {
+            "prefixes": ["+99890", "+99891", "+99893", "+99894", "+99895", "+99897", "+99899"],
+            "subscriber_len": 7,
+        },
     }
 
-    prefix = random.choice(operator_prefixes.get(country, ["+000"]))
-    # Random 6–7 digits for local number part
-    local_number = "".join(str(random.randint(0, 9)) for _ in range(random.choice([6, 7])))
+    cfg = operator_prefixes.get(country)
+    if not cfg:
+        return "+0000000000"  # fallback for unknown country
+
+    prefix = random.choice(cfg["prefixes"])
+    local_number = "".join(str(random.randint(0, 9)) for _ in range(cfg["subscriber_len"]))
     return prefix + local_number
+
 
 # -------------------------------------------------------
 # Main Endpoint
