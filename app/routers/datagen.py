@@ -4,12 +4,13 @@ from openai import OpenAI
 import os
 import json
 import random
+from datetime import datetime
 
 router = APIRouter()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # -------------------------------------------------------
-# Helper functions
+# Utility: Random Generators
 # -------------------------------------------------------
 
 def generate_birth_segment():
@@ -20,105 +21,107 @@ def generate_birth_segment():
     return f"{str(year)[2:]}{month:02d}{day:02d}"
 
 def generate_iin(country: str) -> str:
-    """Generate IIN following country-specific formats."""
+    """Generate realistic IIN (Individual Identification Number)."""
     birth = generate_birth_segment()
 
-    if country == "Russia":
-        return "".join(str(random.randint(0, 9)) for _ in range(12))
-    elif country == "Kazakhstan":
+    if country == "Kazakhstan":
+        # YYMMDD + 6 random digits
         return birth + "".join(str(random.randint(0, 9)) for _ in range(6))
     elif country == "Kyrgyzstan":
+        # YYMMDD + 8 random digits
         return birth + "".join(str(random.randint(0, 9)) for _ in range(8))
     elif country == "Uzbekistan":
+        # YYMMDD + 8 random digits
         return birth + "".join(str(random.randint(0, 9)) for _ in range(8))
+    elif country == "Russia":
+        # 12 digits, Russian SNILS-like format
+        return "".join(str(random.randint(0, 9)) for _ in range(12))
     return "000000000000"
 
 def generate_phone(country: str) -> str:
-    """Generate a realistic phone number for each country."""
-    codes = {
-        "Russia": "+7",
-        "Kazakhstan": "+7",
-        "Kyrgyzstan": "+996",
-        "Uzbekistan": "+998"
+    """Generate realistic phone number with actual operator prefixes."""
+    operator_prefixes = {
+        "Russia": ["+7900", "+7911", "+7926", "+7937", "+7940", "+7952", "+7965", "+7981"],
+        "Kazakhstan": ["+7701", "+7705", "+7707", "+7708", "+7712"],
+        "Kyrgyzstan": ["+99650", "+99655", "+99670", "+99677", "+99699"],
+        "Uzbekistan": ["+99890", "+99891", "+99893", "+99894", "+99897", "+99899"],
     }
-    code = codes.get(country, "+000")
-    number_length = 9 if country in ["Kyrgyzstan", "Uzbekistan"] else 10
-    digits = "".join(str(random.randint(0, 9)) for _ in range(number_length))
-    return f"{code}{digits}"
+
+    prefix = random.choice(operator_prefixes.get(country, ["+000"]))
+    # Random 6–7 digits for local number part
+    local_number = "".join(str(random.randint(0, 9)) for _ in range(random.choice([6, 7])))
+    return prefix + local_number
 
 # -------------------------------------------------------
-# Main API endpoint
+# Main Endpoint
 # -------------------------------------------------------
 
 @router.post("/generate-consignee")
 async def generate_consignee(data: dict):
     """
-    Request example:
-    {
-        "country": "Kazakhstan"
-    }
-
-    Response:
-    {
-        "country": "Kazakhstan",
-        "data": {
-            "consignee_name": "...",
-            "consignee_address": "...",
-            "consignee_iin": "...",
-            "consignee_tel": "..."
-        }
-    }
+    Generate consignee record for a given country.
     """
     try:
         country = data.get("country")
-        valid = ["Russia", "Kazakhstan", "Kyrgyzstan", "Uzbekistan"]
-        if country not in valid:
-            raise HTTPException(status_code=400, detail=f"Country must be one of {valid}")
+        valid_countries = ["Russia", "Kazakhstan", "Kyrgyzstan", "Uzbekistan"]
 
-        # 🔮 Ask OpenAI only for English-transliterated name/address
+        if country not in valid_countries:
+            raise HTTPException(status_code=400, detail=f"Country must be one of {valid_countries}")
+
+        # Seed random for each request (more reproducible but still random)
+        random.seed(datetime.now().timestamp())
+
+        # ✅ Strict JSON prompt
         prompt = f"""
         Generate one realistic consignee record for {country}.
         Requirements:
-        - Output must be in English (default language).
-        - Use only Latin alphabet, no Cyrillic or special characters.
-        - Return ONLY valid JSON with these two fields:
-          {{
-            "consignee_name": "...",
-            "consignee_address": "..."
-          }}
-        - The name and address should look natural for {country} (e.g., common local person name
-          and city/street transliterated into English).
-        - Do not include explanations or any text outside the JSON object.
+        - Output must be in **pure JSON** (no explanations, no markdown).
+        - Use **only Latin alphabet** (no Cyrillic or special characters).
+        - Fields: "consignee_name" and "consignee_address".
+        - Name should look like a real full person name from {country}.
+        - Address should look natural for {country} (include city and street).
+        Example format:
+        {{
+          "consignee_name": "Aidar Nurlanov",
+          "consignee_address": "45 Abai Avenue, Almaty"
+        }}
         """
 
+        # 🔮 OpenAI generation
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content": "You generate localized consignee data in English using Latin alphabet."},
+                {"role": "system", "content": "You are a data generator producing clean JSON using Latin alphabet."},
                 {"role": "user", "content": prompt},
             ],
-            max_tokens=200,
-            temperature=0.7,
+            max_tokens=150,
+            temperature=0.9,
         )
 
         raw_output = response.choices[0].message.content.strip()
 
-        # 🧹 Parse JSON safely
+        # 🧹 Extract valid JSON safely
         try:
-            partial = json.loads(raw_output)
-        except json.JSONDecodeError:
             start = raw_output.find("{")
             end = raw_output.rfind("}")
             if start != -1 and end != -1:
-                partial = json.loads(raw_output[start:end + 1])
+                data_json = json.loads(raw_output[start:end + 1])
             else:
-                raise ValueError("OpenAI did not return valid JSON")
+                raise ValueError("No valid JSON found in model output.")
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Invalid JSON returned: {raw_output}")
 
-        # ✅ Add correct IIN and phone
-        partial["consignee_iin"] = generate_iin(country)
-        partial["consignee_tel"] = generate_phone(country)
+        # ✅ Enrich with IIN and Phone
+        data_json["consignee_iin"] = generate_iin(country)
+        data_json["consignee_tel"] = generate_phone(country)
 
-        return JSONResponse(content={"country": country, "data": partial})
+        return JSONResponse(
+            content={
+                "country": country,
+                "data": data_json,
+                "generated_at": datetime.now().isoformat(),
+            }
+        )
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
