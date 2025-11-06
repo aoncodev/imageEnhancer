@@ -38,14 +38,20 @@ async def generate_docx(request: Request):
 # -------------------------------------------------------------
 async def generate_docx_from_data(data: dict):
     try:
-        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        template_path = os.path.join(base_dir, "invoice_template.docx")
-
-        if not os.path.exists(template_path):
-            raise FileNotFoundError(f"Template not found at {template_path}")
-
-        doc = Document(template_path)
-        print(f"📄 Loaded template: {template_path}")
+        # ---------------------------------------------------------
+        # 📄 Download template from S3
+        # ---------------------------------------------------------
+        if not data.get("template_url"):
+            raise HTTPException(status_code=400, detail="template_url is required in request body")
+        
+        try:
+            template_resp = requests.get(data["template_url"], timeout=30)
+            template_resp.raise_for_status()
+            template_data = BytesIO(template_resp.content)
+            doc = Document(template_data)
+            print(f"📄 Loaded template from S3: {data['template_url']}")
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Failed to download template from S3: {str(e)}")
 
         # ---------------------------------------------------------
         # 🖼️ Download images (logo + seal)
@@ -95,18 +101,23 @@ async def generate_docx_from_data(data: dict):
 
         # ---------------------------------------------------------
         # ✍️ Replace text placeholders with bold values
+        # Supports both {key} and {{key}} formats
         # ---------------------------------------------------------
         def replace_text_in_paragraph(paragraph):
             full_text = "".join(run.text for run in paragraph.runs)
-            if not re.search(r"\{\s*\w+\s*\}", full_text):
+            # Check for both {key} and {{key}} formats
+            if not re.search(r"\{\{?\s*\w+\s*\}?\}", full_text):
                 return
 
             new_text = full_text
             for key, value in data.items():
-                if key in ["logo_image", "seal_image"]:
+                if key in ["logo_image", "seal_image", "template_url"]:
                     continue
-                pattern = re.compile(rf"\{{\s*{re.escape(key)}\s*\}}", re.IGNORECASE)
-                new_text = pattern.sub(str(value), new_text)
+                # Match both {key} and {{key}} formats (case-insensitive)
+                pattern_single = re.compile(rf"\{{\s*{re.escape(key)}\s*\}}", re.IGNORECASE)
+                pattern_double = re.compile(rf"\{{{{\s*{re.escape(key)}\s*\}}}}", re.IGNORECASE)
+                new_text = pattern_single.sub(str(value), new_text)
+                new_text = pattern_double.sub(str(value), new_text)
 
             if new_text != full_text:
                 for run in paragraph.runs[:]:
@@ -127,24 +138,29 @@ async def generate_docx_from_data(data: dict):
 
         # ---------------------------------------------------------
         # 🖼️ Insert images
+        # Supports both {key} and {{key}} formats
         # ---------------------------------------------------------
         def insert_images_in_paragraph(paragraph):
             full_text = "".join(run.text for run in paragraph.runs)
-            has_logo = re.search(r"\{\s*logo_image\s*\}", full_text)
-            has_seal = re.search(r"\{\s*seal_image\s*\}", full_text)
+            # Check for both {key} and {{key}} formats
+            has_logo = re.search(r"\{\{?\s*logo_image\s*\}?\}", full_text, re.IGNORECASE)
+            has_seal = re.search(r"\{\{?\s*seal_image\s*\}?\}", full_text, re.IGNORECASE)
             if not (has_logo or has_seal):
                 return
 
-            parts = re.split(r"(\{\s*logo_image\s*\}|\{\s*seal_image\s*\})", full_text)
+            # Split on both {key} and {{key}} formats
+            parts = re.split(r"(\{\{?\s*logo_image\s*\}?\}|\{\{?\s*seal_image\s*\}?\})", full_text, flags=re.IGNORECASE)
             for run in paragraph.runs[:]:
                 paragraph._element.remove(run._element)
 
             for part in parts:
-                if re.match(r"\{\s*logo_image\s*\}", part) and logo_data:
+                # Match both {logo_image} and {{logo_image}} formats
+                if re.match(r"\{\{?\s*logo_image\s*\}?\}", part, re.IGNORECASE) and logo_data:
                     logo_data.seek(0)
                     run = paragraph.add_run()
                     run.add_picture(logo_data, width=Inches(1.3))
-                elif re.match(r"\{\s*seal_image\s*\}", part) and seal_data:
+                # Match both {seal_image} and {{seal_image}} formats
+                elif re.match(r"\{\{?\s*seal_image\s*\}?\}", part, re.IGNORECASE) and seal_data:
                     seal_data.seek(0)
                     run = paragraph.add_run()
                     run.add_picture(seal_data, width=Inches(1.2))
