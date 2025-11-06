@@ -10,3 +10,22 @@ ENV/
 __pycache__/
 *.py[cod]
 *$py.class
+.DS_Store
+
+# Logs and temp
+*.log
+*.tmp
+*.bak
+
+# Model files
+*.pt
+*.onnx
+*.h5
+
+# Systemd and PM2 artifacts
+*.pid
+*.sock
+
+# VSCode / JetBrains
+.vscode/
+.idea/
