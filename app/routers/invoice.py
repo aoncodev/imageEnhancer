@@ -101,23 +101,19 @@ async def generate_docx_from_data(data: dict):
 
         # ---------------------------------------------------------
         # ✍️ Replace text placeholders with bold values
-        # Supports both {key} and {{key}} formats
+        # Supports {key} format
         # ---------------------------------------------------------
         def replace_text_in_paragraph(paragraph):
             full_text = "".join(run.text for run in paragraph.runs)
-            # Check for both {key} and {{key}} formats
-            if not re.search(r"\{\{?\s*\w+\s*\}?\}", full_text):
+            if not re.search(r"\{\s*\w+\s*\}", full_text):
                 return
 
             new_text = full_text
             for key, value in data.items():
                 if key in ["logo_image", "seal_image", "template_url"]:
                     continue
-                # Match both {key} and {{key}} formats (case-insensitive)
-                pattern_single = re.compile(rf"\{{\s*{re.escape(key)}\s*\}}", re.IGNORECASE)
-                pattern_double = re.compile(rf"\{{{{\s*{re.escape(key)}\s*\}}}}", re.IGNORECASE)
-                new_text = pattern_single.sub(str(value), new_text)
-                new_text = pattern_double.sub(str(value), new_text)
+                pattern = re.compile(rf"\{{\s*{re.escape(key)}\s*\}}", re.IGNORECASE)
+                new_text = pattern.sub(str(value), new_text)
 
             if new_text != full_text:
                 for run in paragraph.runs[:]:
@@ -138,29 +134,25 @@ async def generate_docx_from_data(data: dict):
 
         # ---------------------------------------------------------
         # 🖼️ Insert images
-        # Supports both {key} and {{key}} formats
+        # Supports {key} format
         # ---------------------------------------------------------
         def insert_images_in_paragraph(paragraph):
             full_text = "".join(run.text for run in paragraph.runs)
-            # Check for both {key} and {{key}} formats
-            has_logo = re.search(r"\{\{?\s*logo_image\s*\}?\}", full_text, re.IGNORECASE)
-            has_seal = re.search(r"\{\{?\s*seal_image\s*\}?\}", full_text, re.IGNORECASE)
+            has_logo = re.search(r"\{\s*logo_image\s*\}", full_text, re.IGNORECASE)
+            has_seal = re.search(r"\{\s*seal_image\s*\}", full_text, re.IGNORECASE)
             if not (has_logo or has_seal):
                 return
 
-            # Split on both {key} and {{key}} formats
-            parts = re.split(r"(\{\{?\s*logo_image\s*\}?\}|\{\{?\s*seal_image\s*\}?\})", full_text, flags=re.IGNORECASE)
+            parts = re.split(r"(\{\s*logo_image\s*\}|\{\s*seal_image\s*\})", full_text, flags=re.IGNORECASE)
             for run in paragraph.runs[:]:
                 paragraph._element.remove(run._element)
 
             for part in parts:
-                # Match both {logo_image} and {{logo_image}} formats
-                if re.match(r"\{\{?\s*logo_image\s*\}?\}", part, re.IGNORECASE) and logo_data:
+                if re.match(r"\{\s*logo_image\s*\}", part, re.IGNORECASE) and logo_data:
                     logo_data.seek(0)
                     run = paragraph.add_run()
                     run.add_picture(logo_data, width=Inches(1.3))
-                # Match both {seal_image} and {{seal_image}} formats
-                elif re.match(r"\{\{?\s*seal_image\s*\}?\}", part, re.IGNORECASE) and seal_data:
+                elif re.match(r"\{\s*seal_image\s*\}", part, re.IGNORECASE) and seal_data:
                     seal_data.seek(0)
                     run = paragraph.add_run()
                     run.add_picture(seal_data, width=Inches(1.2))
