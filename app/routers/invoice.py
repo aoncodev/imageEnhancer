@@ -102,6 +102,7 @@ async def generate_docx_from_data(data: dict):
         # ---------------------------------------------------------
         # ✍️ Replace text placeholders with bold values
         # Supports {key} format
+        # Preserves paragraph spacing - only makes text bold
         # ---------------------------------------------------------
         def replace_text_in_paragraph(paragraph):
             full_text = "".join(run.text for run in paragraph.runs)
@@ -116,6 +117,8 @@ async def generate_docx_from_data(data: dict):
                 new_text = pattern.sub(str(value), new_text)
 
             if new_text != full_text:
+                # Preserve paragraph formatting (spacing, alignment, etc.)
+                # Only replace the text content and make it bold
                 for run in paragraph.runs[:]:
                     paragraph._element.remove(run._element)
                 run = paragraph.add_run(new_text)
