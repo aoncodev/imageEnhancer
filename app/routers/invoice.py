@@ -102,7 +102,8 @@ async def generate_docx_from_data(data: dict):
         # ---------------------------------------------------------
         # ✍️ Replace text placeholders with bold values
         # Supports {key} format
-        # Preserves paragraph spacing - only makes text bold
+        # Preserves paragraph spacing and font - only makes text bold
+        # Special handling for port_loading: includes port_name + port_loading on separate lines
         # ---------------------------------------------------------
         def replace_text_in_paragraph(paragraph):
             full_text = "".join(run.text for run in paragraph.runs)
@@ -110,19 +111,72 @@ async def generate_docx_from_data(data: dict):
                 return
 
             new_text = full_text
+            
+            # Special handling for port_loading: combine port_name and port_loading
+            if re.search(r"\{\s*port_loading\s*\}", new_text, re.IGNORECASE):
+                port_name = data.get("port_name", "")
+                port_loading = data.get("port_loading", "")
+                port_value = ""
+                if port_name and port_loading:
+                    port_value = f"{port_name}\n{port_loading}"
+                elif port_name:
+                    port_value = port_name
+                elif port_loading:
+                    port_value = port_loading
+                
+                if port_value:
+                    pattern = re.compile(r"\{\s*port_loading\s*\}", re.IGNORECASE)
+                    new_text = pattern.sub(port_value, new_text)
+            
+            # Replace other placeholders
             for key, value in data.items():
-                if key in ["logo_image", "seal_image", "template_url"]:
+                if key in ["logo_image", "seal_image", "template_url", "port_loading"]:
                     continue
                 pattern = re.compile(rf"\{{\s*{re.escape(key)}\s*\}}", re.IGNORECASE)
                 new_text = pattern.sub(str(value), new_text)
 
             if new_text != full_text:
-                # Preserve paragraph formatting (spacing, alignment, etc.)
+                # Preserve paragraph formatting (spacing, alignment, font, etc.)
+                # Get the original font from the first run to preserve it
+                original_font_name = None
+                original_font_size = None
+                if paragraph.runs:
+                    original_run = paragraph.runs[0]
+                    try:
+                        if original_run.font.name:
+                            original_font_name = original_run.font.name
+                    except:
+                        pass
+                    try:
+                        if original_run.font.size:
+                            original_font_size = original_run.font.size
+                    except:
+                        pass
+                
                 # Only replace the text content and make it bold
                 for run in paragraph.runs[:]:
                     paragraph._element.remove(run._element)
-                run = paragraph.add_run(new_text)
-                run.bold = True
+                
+                # Split by newlines to preserve line breaks
+                lines = new_text.split('\n')
+                for i, line in enumerate(lines):
+                    # Add the line text
+                    run = paragraph.add_run(line)
+                    run.bold = True
+                    # Preserve original font if it existed
+                    if original_font_name:
+                        try:
+                            run.font.name = original_font_name
+                        except:
+                            pass
+                    if original_font_size:
+                        try:
+                            run.font.size = original_font_size
+                        except:
+                            pass
+                    # Add line break after each line except the last one
+                    if i < len(lines) - 1:
+                        paragraph.add_run().add_break()
 
         def replace_text_in_cell(cell):
             for paragraph in cell.paragraphs:
