@@ -11,6 +11,7 @@ import requests
 from io import BytesIO
 from PIL import Image
 import json
+from datetime import datetime
 
 router = APIRouter()
 s3 = S3Service()
@@ -103,6 +104,31 @@ async def generate_docx_from_data(data: dict):
                         print(f"🔢 Formatted {key}: {data[key]}")
                 except (ValueError, TypeError) as e:
                     print(f"⚠️ Could not format {key}: {e}")
+
+        # ---------------------------------------------------------
+        # 📅 Format date values as text (e.g., 20 November 2025)
+        # ---------------------------------------------------------
+        def format_date_text(value: str, include_year: bool = True) -> str:
+            try:
+                value_clean = str(value).strip()
+                if not value_clean:
+                    return value
+                dt = datetime.strptime(value_clean, "%Y-%m-%d")
+                return dt.strftime("%d %B %Y") if include_year else dt.strftime("%d %B")
+            except (ValueError, TypeError):
+                return value
+
+        if "invoice_date" in data and data["invoice_date"]:
+            original_invoice = data["invoice_date"]
+            data["invoice_date"] = format_date_text(data["invoice_date"], include_year=True)
+            if data["invoice_date"] != original_invoice:
+                print(f"📅 Formatted invoice_date: {data['invoice_date']}")
+
+        if "sailing_date" in data and data["sailing_date"]:
+            original_sailing = data["sailing_date"]
+            data["sailing_date"] = format_date_text(data["sailing_date"], include_year=False)
+            if data["sailing_date"] != original_sailing:
+                print(f"📅 Formatted sailing_date: {data['sailing_date']}")
 
         # ---------------------------------------------------------
         # ✍️ Replace text placeholders with bold values
