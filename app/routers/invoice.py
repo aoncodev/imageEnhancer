@@ -131,6 +131,15 @@ async def generate_docx_from_data(data: dict):
                 print(f"📅 Formatted sailing_date: {data['sailing_date']}")
 
         # ---------------------------------------------------------
+        # 🌍 Swap destination and destination_country values
+        # ---------------------------------------------------------
+        if "destination" in data or "destination_country" in data:
+            destination_value = data.get("destination")
+            destination_country_value = data.get("destination_country")
+            data["destination"] = destination_country_value
+            data["destination_country"] = destination_value
+
+        # ---------------------------------------------------------
         # ✍️ Replace text placeholders with bold values
         # Supports {key} format
         # Preserves paragraph spacing and font - only makes text bold
