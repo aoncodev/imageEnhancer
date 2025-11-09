@@ -41,15 +41,20 @@ async def generate_docx_from_data(data: dict):
         # ---------------------------------------------------------
         # 📄 Download template from S3
         # ---------------------------------------------------------
-        if not data.get("template_url"):
-            raise HTTPException(status_code=400, detail="template_url is required in request body")
-        
+        template_url = data.get("file_url") or data.get("template_url")
+
+        if not template_url:
+            raise HTTPException(
+                status_code=400,
+                detail="file_url (or legacy template_url) is required in request body",
+            )
+
         try:
-            template_resp = requests.get(data["template_url"], timeout=30)
+            template_resp = requests.get(template_url, timeout=30)
             template_resp.raise_for_status()
             template_data = BytesIO(template_resp.content)
             doc = Document(template_data)
-            print(f"📄 Loaded template from S3: {data['template_url']}")
+            print(f"📄 Loaded template from S3: {template_url}")
         except Exception as e:
             raise HTTPException(status_code=400, detail=f"Failed to download template from S3: {str(e)}")
 
@@ -130,7 +135,7 @@ async def generate_docx_from_data(data: dict):
             
             # Replace other placeholders
             for key, value in data.items():
-                if key in ["logo_image", "seal_image", "template_url", "port_loading"]:
+                if key in ["logo_image", "seal_image", "template_url", "file_url", "port_loading"]:
                     continue
                 pattern = re.compile(rf"\{{\s*{re.escape(key)}\s*\}}", re.IGNORECASE)
                 new_text = pattern.sub(str(value), new_text)
