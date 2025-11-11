@@ -99,11 +99,12 @@ async def generate_consignee(data: dict):
         - Use **only Latin alphabet** (no Cyrillic or special characters).
         - Fields: "consignee_name" and "consignee_address".
         - Name should look like a real full person name from {country}.
-        - Address must start with the country name, followed by the city, then detailed street info (e.g., "Russia, Moscow, 123 Tverskaya Street").
+        - Name must be formatted as "Surname Name" (surname first, given name second).
+        - Address must start with the country name, followed by the city, then detailed street info and include a house or apartment number (e.g., "Russia, Moscow, 123 Tverskaya Street, Apt 12").
         Example format:
         {{
-          "consignee_name": "Aidar Nurlanov",
-          "consignee_address": "Kazakhstan, Almaty, 45 Abai Avenue"
+          "consignee_name": "Nurlanov Aidar",
+          "consignee_address": "Kazakhstan, Almaty, 45 Abai Avenue, Apt 7"
         }}
         """
 
